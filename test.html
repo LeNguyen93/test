@@ -2,66 +2,71 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Trái Tim 3D Đẹp</title>
+  <title>Trái tim hiệu ứng</title>
   <style>
     body {
       margin: 0;
-      height: 100vh;
-      background: linear-gradient(135deg, #ff758c, #ff7eb3);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #ff9a9e, #fad0c4);
       overflow: hidden;
+      height: 100vh;
     }
 
-    .heart {
-      position: relative;
-      width: 150px;
-      height: 150px;
+    .heart-floating {
+      position: absolute;
+      width: 80px;
+      height: 80px;
       background: red;
       transform: rotate(-45deg);
-      animation: beat 1s infinite;
+      top: 50%;
+      left: 50%;
+      margin: -40px 0 0 -40px;
+      animation: float 4s ease-in-out infinite;
       box-shadow: 0 0 25px rgba(255, 0, 0, 0.6);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      z-index: 2;
+      transition: transform 0.3s;
     }
 
-    .heart::before,
-    .heart::after {
+    .heart-floating::before,
+    .heart-floating::after {
       content: '';
       position: absolute;
-      width: 150px;
-      height: 150px;
+      width: 80px;
+      height: 80px;
       background: red;
       border-radius: 50%;
     }
 
-    .heart::before {
-      top: -75px;
+    .heart-floating::before {
+      top: -40px;
       left: 0;
     }
 
-    .heart::after {
-      left: 75px;
+    .heart-floating::after {
+      left: 40px;
       top: 0;
     }
 
-    .heart:hover {
+    .heart-floating:hover {
       transform: rotate(-45deg) scale(1.2);
       box-shadow: 0 0 40px rgba(255, 100, 100, 0.9);
     }
 
-    @keyframes beat {
+    @keyframes float {
       0%, 100% {
-        transform: rotate(-45deg) scale(1);
+        transform: rotate(-45deg) translateY(0);
       }
       50% {
-        transform: rotate(-45deg) scale(1.1);
+        transform: rotate(-45deg) translateY(-20px);
       }
     }
-  </style>
-</head>
-<body>
-  <div class="heart"></div>
-</body>
-</html>
+
+    .falling-heart {
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      background: pink;
+      transform: rotate(-45deg);
+      animation: fall linear infinite;
+      opacity: 0.8;
+      border-radius: 50%;
+    }
