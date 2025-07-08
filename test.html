@@ -1,123 +1,73 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <title>Trái Tim Hiệu Ứng Rõ Nét</title>
-  <style>
-    body {
-      margin: 0;
-      background: radial-gradient(circle at center, #2b2e4a, #1f1f1f);
-      overflow: hidden;
-      height: 100vh;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hiệu Ứng Trái Tim Kiểu TikTok</title>
+<style>
+  body {
+    margin: 0;
+    background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    user-select: none;
+    cursor: pointer;
+  }
+  .heart {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(45deg, #ff3c78, #ff2a68);
+    transform: rotate(-45deg);
+    filter: drop-shadow(0 0 3px #ff2a68);
+    animation: floatUp 1.5s forwards;
+    pointer-events: none;
+    opacity: 1;
+    z-index: 1000;
+  }
+  .heart::before,
+  .heart::after {
+    content: "";
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(45deg, #ff3c78, #ff2a68);
+    border-radius: 50%;
+  }
+  .heart::before {
+    top: -15px;
+    left: 0;
+  }
+  .heart::after {
+    left: 15px;
+    top: 0;
+  }
 
-    .heart-floating {
-      position: absolute;
-      width: 100px;
-      height: 100px;
-      background: linear-gradient(135deg, #ff416c, #ff4b2b);
-      transform: rotate(-45deg);
-      top: 50%;
-      left: 50%;
-      margin: -50px 0 0 -50px;
-      animation: float 3s ease-in-out infinite;
-      box-shadow: 0 0 30px rgba(255, 65, 108, 0.8);
-      z-index: 2;
-      transition: transform 0.3s ease-in-out;
+  @keyframes floatUp {
+    0% {
+      opacity: 1;
+      transform: translateY(0) rotate(-45deg) scale(1);
     }
-
-    .heart-floating::before,
-    .heart-floating::after {
-      content: '';
-      position: absolute;
-      width: 100px;
-      height: 100px;
-      background: linear-gradient(135deg, #ff416c, #ff4b2b);
-      border-radius: 50%;
+    100% {
+      opacity: 0;
+      transform: translateY(-150px) rotate(-45deg) scale(1.5);
     }
-
-    .heart-floating::before {
-      top: -50px;
-      left: 0;
-    }
-
-    .heart-floating::after {
-      left: 50px;
-      top: 0;
-    }
-
-    .heart-floating:hover {
-      transform: rotate(-45deg) scale(1.2);
-      box-shadow: 0 0 60px rgba(255, 65, 108, 1);
-    }
-
-    @keyframes float {
-      0%, 100% {
-        transform: rotate(-45deg) translateY(0);
-      }
-      50% {
-        transform: rotate(-45deg) translateY(-20px);
-      }
-    }
-
-    .falling-heart {
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background: hotpink;
-      transform: rotate(-45deg);
-      animation: fall linear infinite;
-      opacity: 0.85;
-      border-radius: 50%;
-      border: 1px solid white;
-    }
-
-    .falling-heart::before,
-    .falling-heart::after {
-      content: '';
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background: hotpink;
-      border-radius: 50%;
-      border: 1px solid white;
-    }
-
-    .falling-heart::before {
-      top: -10px;
-      left: 0;
-    }
-
-    .falling-heart::after {
-      left: 10px;
-      top: 0;
-    }
-
-    @keyframes fall {
-      to {
-        transform: translateY(100vh) rotate(360deg);
-        opacity: 0;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
-  <div class="heart-floating"></div>
-
-  <script>
-    function createFallingHeart() {
-      const heart = document.createElement('div');
-      heart.classList.add('falling-heart');
-      heart.style.left = Math.random() * window.innerWidth + 'px';
-      heart.style.animationDuration = (2 + Math.random() * 3) + 's';
-      document.body.appendChild(heart);
-
-      setTimeout(() => {
-        heart.remove();
-      }, 6000);
-    }
-
-    setInterval(createFallingHeart, 120);
-  </script>
+<script>
+  document.body.addEventListener("click", (e) => {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.style.left = e.clientX - 15 + "px";
+    heart.style.top = e.clientY - 15 + "px";
+    document.body.appendChild(heart);
+    setTimeout(() => {
+      heart.remove();
+    }, 1500);
+  });
+</script>
 </body>
 </html>
